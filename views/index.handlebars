@@ -1,0 +1,101 @@
+{{!-- Setup the index.handlebars to have the template that Handlebars can render onto. --}}
+{{!-- Create a button in index.handlebars that will submit the user input into the database. --}}
+<img src=" ## " class="pic">
+<h1>Eat-Da-Burger</h1>
+
+<p>Which burger would you like to eat first?!</p>
+
+<!-- Pass in data from server.js -->
+<ul>
+  {{#each burgers}}
+  <li>
+    <p>
+      {{this.id}}. {{this.burger}}
+
+      <button data-burger_nameid="{{this.id}}" class="devourIt">Devour it!!</button>
+    </p>
+  </li>
+  {{/each}}
+</ul>
+
+<h2>Enter a burger you want to place an order then click on the "Submit" button.</h2>
+<form id="createBurger" class="button-size">
+  <textarea type="text" name="burger"></textarea>
+  <button type="submit">Submit</button>
+</form>
+
+<h2>Update a Burger</h2>
+<form id="updateBurger" class="button-size">
+  <select name="id">
+		{{#each burgers}} {{!-- drop down value of what you've created --}}
+			<option value="{{this.id}}">{{this.burger}}</option>
+		{{/each}}
+	</select>
+  <textarea type="text" name="burger" placeholder="Enter a burger to be replaced with"></textarea>
+  <button type="submit">Replace your order!</button>
+</form>
+
+<script type="text/javascript">
+  $(".devourIt").on("click", function(event) {
+    // Get the ID from the button.
+    // This is shorthand for $(this).attr("data-burgerid")
+    var id = $(this).data("burger_nameid");
+
+    // Send the DELETE request.
+    $.ajax("/api/burgers/" + id, {
+      type: "DELETE"
+    }).then(
+      function() {
+        console.log("deleted id ", id);
+        // Reload the page to get the updated list
+        location.reload();
+      }
+    );
+  });
+
+  $("#createBurger").on("submit", function(event) {
+    // Make sure to preventDefault on a submit event.
+    event.preventDefault();
+
+    // [name=burger] will find an element with a "name" attribute equal to the string "burger"
+    var newBurger = {
+      burger: $("#createBurger [name=burger]").val().trim()
+    };
+
+    // Send the POST request.
+    $.ajax("/api/burgers", {
+      type: "POST",
+      data: newBurger
+    }).then(
+      function() {
+        console.log("created new burger");
+        // Reload the page to get the updated list
+        location.reload();
+      }
+    );
+  });
+
+  $("#updateBurger").on("submit", function(event) {
+    // Make sure to preventDefault on a submit event.
+    event.preventDefault();
+
+    // Get the ID by finding an element with a "name" attribute equal to the string "id"
+    var id = $("[name=id]").val().trim();
+
+    var updatedburger = {
+      burger: $("#updateBurger [name=burger]").val().trim()
+    };
+
+    // Send the PUT request.
+    $.ajax("/api/burgers/" + id, {
+      type: "PUT",
+      data: updatedburger
+    }).then(
+      function() {
+        console.log("updated id ", id);
+        // Reload the page to get the updated list
+        location.reload();
+      }
+    );
+  });
+</script>
