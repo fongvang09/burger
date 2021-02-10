@@ -1,6 +1,6 @@
 {{!-- Setup the index.handlebars to have the template that Handlebars can render onto. --}}
 {{!-- Create a button in index.handlebars that will submit the user input into the database. --}}
-<img src=" ## " class="pic">
+<img src="../public/assets/img/burger.jpg" alt="hamburger-cartoon-holding-cutlery" class="pic" />
 <h1>Eat-Da-Burger</h1>
 
 <p>Which burger would you like to eat first?!</p>
@@ -10,7 +10,7 @@
   {{#each burgers}}
   <li>
     <p>
-      {{this.id}}. {{this.burger}}
+      {{this.id}}. {{this.burger_name}}.{{this.devoured}}
 
       <button data-burger_nameid="{{this.id}}" class="devourIt">Devour it!!</button>
     </p>
@@ -24,7 +24,7 @@
   <button type="submit">Submit</button>
 </form>
 
-<h2>Update a Burger</h2>
+<h2>Update your order!</h2>
 <form id="updateBurger" class="button-size">
   <select name="id">
 		{{#each burgers}} {{!-- drop down value of what you've created --}}
