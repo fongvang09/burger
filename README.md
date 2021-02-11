@@ -16,5 +16,10 @@ Your app will store every burger in a database, whether devoured or not.
 GitHub: https://github.com/fongvang09/burger
 
 Heroku: N/A
+
 (Page was still displaying issues so couldn't host it on Heroku)
-(Pseudocode of what's left to be done besides errors: Have user input in textarea to display under list of burgers. 
+
+(Pseudocode of what's left to be done besides errors: 
+Have user input in textarea to display under list of burgers.
+When user clicks "Devour It!" button, have it displayed on right side notifying user that it's been consumed and gone from list.
+
