@@ -9,7 +9,7 @@ Your app will store every burger in a database, whether devoured or not.
 
 ## Screenshot
 
-![Screenshot of webpage]()
+![Screenshot of webpage](public/assets/img/Capture.JPG)
 
 ## Links
 
